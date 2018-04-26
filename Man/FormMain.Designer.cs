@@ -1,4 +1,4 @@
-﻿namespace Man
+﻿dnamespace Man
 {
     partial class FormMain
     {
