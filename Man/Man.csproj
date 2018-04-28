@@ -111,6 +111,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data.txt" />
     <Content Include="dll\DocumentFormat.OpenXml.dll" />
     <Content Include="dll\Microsoft.Office.Interop.Word.dll" />
     <Content Include="dll\Newtonsoft.Json.dll" />
