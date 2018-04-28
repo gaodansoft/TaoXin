@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -231,6 +232,30 @@ namespace Man
             rd.TemplateName = "aaaa";
 
             return rd;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //先在模板中设定格式
+
+            Microsoft.Office.Interop.Word.Application application = new Microsoft.Office.Interop.Word.Application();
+            application.Visible = true;
+            Microsoft.Office.Interop.Word.Document t  = application.Documents.Open("d:\\aa.docx");
+            t.Shapes.AddLine(0, 0, 200, 100);
+            Microsoft.Office.Interop.Word.Shape  s=t.Shapes.AddTextbox(Microsoft.Office.Core.MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 100, 100);
+            s.TextFrame.TextRange.Text = "fdsafsadfsadfsa";
+            Microsoft.Office.Interop.Word.Shape ss = t.Shapes.AddShape(9, 150, 100, 100, 50);
+        
+            ss.BackgroundStyle = Microsoft.Office.Core.MsoBackgroundStyleIndex.msoBackgroundStylePreset1;
+            ss.TextFrame.TextRange.Text = "fdsafsadfsadfsa的的的的";
+            //ss.TextFrame.TextRange. = "fdsafsadfsadfsa的的的的";
+
+           // ss.TextFrame.TextRange.
+
+            application.Quit();
+         
+
+
         }
     }
 }
