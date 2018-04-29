@@ -11,13 +11,17 @@ namespace Man
     public class DataHelp
     {
         public static List<User> UserAll = new List<User>();
-        public static List<BOM> RootBom = new List<BOM>();
+        public static List<BOM> RootBom = null;
         public DataHelp()
         {
-            for (int i = 0; i < 1000; i++)
+          string[] lines=  File.ReadAllLines(".\\桃一村民.csv");
+            foreach (var item in lines)
             {
-                User user = new User() { Id = i.ToString(), Name = "名字" + i.ToString() };
-                UserAll.Add(user);
+              string[] sl=  item.Split(',');
+                if (sl.Length > 1)
+                {
+                    UserAll.Add(new User() { Id = sl[1], Name = sl[0] });
+                }
             }
         }
         public List<User> GetUser(string key)
@@ -38,8 +42,12 @@ namespace Man
             //    bom.Son.Add(sbom);
             //    RootBom.Add(bom);
             //}
-            string text = File.ReadAllText(".\\Data.txt");
-            RootBom = JsonConvert.DeserializeObject<List<BOM>>(text);
+            if (RootBom == null)
+            {
+                string text = File.ReadAllText(".\\Data.txt");
+                RootBom = JsonConvert.DeserializeObject<List<BOM>>(text);
+                return RootBom;
+            }
             return RootBom;
 
 

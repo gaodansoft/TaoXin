@@ -22,28 +22,31 @@ namespace Man
         }
         public void Create(ReportData report)
         {
-            slDocument.SetCellValue(2, 2, report.TemplateName);
+           // slDocument.SetCellValue(2, 2, report.TemplateName);
             for (int i = 0; i < report.BomData.Count; i++)
             {
-                CurRow = i + 4;
-                slDocument.CopyRow(4, CurRow);
+              
+               // slDocument.CopyRow(CurRow+1, CurRow + 2);
+                CurRow = i + 2;
+                slDocument.InsertRow(CurRow, 1);
+                slDocument.CopyRow(CurRow+1, CurRow);
                 AddRow(report.BomData[i]);
             }
 
         }
         public void AddRow(BomData bomData)
         {
-            slDocument.SetCellValue(CurRow, 2, bomData.Level);
-            slDocument.SetCellValue(CurRow, 3, bomData.TemplateName);
-            slDocument.SetCellValue(CurRow, 4, bomData.SeriesID);
-            slDocument.SetCellValue(CurRow, 5, bomData.TemplateID);
-            slDocument.SetCellValue(CurRow, 6, bomData.TemplateState);
-            slDocument.SetCellValue(CurRow, 7, bomData.Identifier);
+            int start = bomData.Level * 3;
+            slDocument.SetCellValue(CurRow, start+1, bomData.Bom.Name);
+            slDocument.SetCellValue(CurRow, start + 2, bomData.Bom.ID );
+            slDocument.SetCellValue(CurRow, start + 3, bomData.Bom.Node);
+
+
         }
         public static string GetSPath()
         {
             var plugInpath = System.IO.Path.GetDirectoryName(typeof(Report).Assembly.CodeBase.Replace("file:///", ""));
-            return Path.Combine(plugInpath, "Template.xlsx");
+            return Path.Combine(plugInpath, "家系图表模板.xlsx");
         }
         public void Save(string fileName)
         {
@@ -76,11 +79,7 @@ namespace Man
     }
     public class BomData
     {
-        public string Level { get; set; }
-        public string TemplateName { get; set; }
-        public string SeriesID { get; set; }
-        public string TemplateID { get; set; }
-        public string TemplateState { get; set; }
-        public string Identifier { get; set; }
+        public int  Level { get; set; }
+        public BOM Bom { get; set; }
     }
 }

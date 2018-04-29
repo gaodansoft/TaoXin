@@ -106,12 +106,20 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Template.xlsx" />
+    <None Include="家系图表模板.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="桃一村民.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data.txt" />
+    <Content Include="Data.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="dll\DocumentFormat.OpenXml.dll" />
     <Content Include="dll\Microsoft.Office.Interop.Word.dll" />
     <Content Include="dll\Newtonsoft.Json.dll" />
