@@ -361,5 +361,18 @@ namespace Man
                 SetReportBOM(rd, sitem, level + 1);
             }
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataHelp.Save();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
     }
 }

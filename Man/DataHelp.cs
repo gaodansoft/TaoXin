@@ -10,6 +10,7 @@ namespace Man
 {
     public class DataHelp
     {
+        public static string DataPath = ".\\Data\\data.txt";
         public static List<User> UserAll = new List<User>();
         public static List<BOM> RootBom = null;
         public DataHelp()
@@ -44,9 +45,17 @@ namespace Man
             //}
             if (RootBom == null)
             {
-                string text = File.ReadAllText(".\\Data.txt");
-                RootBom = JsonConvert.DeserializeObject<List<BOM>>(text);
-                return RootBom;
+                if (File.Exists(DataPath))
+                {
+                    string text = File.ReadAllText(DataPath);
+                    RootBom = JsonConvert.DeserializeObject<List<BOM>>(text);
+                    return RootBom;
+                }
+                else
+                {
+                    RootBom = new List<BOM>();
+                }
+                
             }
             return RootBom;
 
@@ -54,8 +63,20 @@ namespace Man
         }
         public void Save()
         {
+
+           string dir= Path.GetDirectoryName(DataPath);
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            if (File.Exists(DataPath))
+            {
+
+                string newPath = Path.Combine(dir, DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".txt");
+                File.Move(DataPath, newPath);
+            }
             string data = JsonConvert.SerializeObject(RootBom);
-            File.WriteAllText(".\\Data.txt", data);
+            File.WriteAllText(DataPath, data);
         }
     }
 }

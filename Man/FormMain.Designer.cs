@@ -42,8 +42,12 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.添加ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出EXCELToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.treeView2 = new System.Windows.Forms.TreeView();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.添加ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,10 +55,6 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.添加ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.导出EXCELToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -131,6 +131,7 @@
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton2.Text = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // splitContainer1
             // 
@@ -168,21 +169,28 @@
             this.删除ToolStripMenuItem,
             this.导出EXCELToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 70);
             // 
             // 添加ToolStripMenuItem1
             // 
             this.添加ToolStripMenuItem1.Name = "添加ToolStripMenuItem1";
-            this.添加ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.添加ToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
             this.添加ToolStripMenuItem1.Text = "添加";
             this.添加ToolStripMenuItem1.Click += new System.EventHandler(this.添加ToolStripMenuItem1_Click);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
+            // 
+            // 导出EXCELToolStripMenuItem
+            // 
+            this.导出EXCELToolStripMenuItem.Name = "导出EXCELToolStripMenuItem";
+            this.导出EXCELToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.导出EXCELToolStripMenuItem.Text = "导出EXCEL";
+            this.导出EXCELToolStripMenuItem.Click += new System.EventHandler(this.导出EXCELToolStripMenuItem_Click);
             // 
             // splitContainer2
             // 
@@ -217,6 +225,29 @@
             this.treeView2.Size = new System.Drawing.Size(714, 290);
             this.treeView2.TabIndex = 1;
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加ToolStripMenuItem2,
+            this.删除ToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 48);
+            this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
+            // 
+            // 添加ToolStripMenuItem2
+            // 
+            this.添加ToolStripMenuItem2.Name = "添加ToolStripMenuItem2";
+            this.添加ToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.添加ToolStripMenuItem2.Text = "添加";
+            this.添加ToolStripMenuItem2.Click += new System.EventHandler(this.toolStripButtonCreateSon_Click);
+            // 
+            // 删除ToolStripMenuItem1
+            // 
+            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
+            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem1.Text = "删除";
+            this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem1_Click);
             // 
             // label3
             // 
@@ -262,7 +293,7 @@
             // buttonOK
             // 
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(542, 107);
+            this.buttonOK.Location = new System.Drawing.Point(542, 150);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 5;
@@ -289,36 +320,6 @@
             this.comboBox1.TextUpdate += new System.EventHandler(this.comboBox1_TextUpdate);
             this.comboBox1.DropDownClosed += new System.EventHandler(this.comboBox1_DropDownClosed);
             this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.添加ToolStripMenuItem2,
-            this.删除ToolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 48);
-            this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
-            // 
-            // 添加ToolStripMenuItem2
-            // 
-            this.添加ToolStripMenuItem2.Name = "添加ToolStripMenuItem2";
-            this.添加ToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
-            this.添加ToolStripMenuItem2.Text = "添加";
-            this.添加ToolStripMenuItem2.Click += new System.EventHandler(this.toolStripButtonCreateSon_Click);
-            // 
-            // 删除ToolStripMenuItem1
-            // 
-            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
-            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
-            this.删除ToolStripMenuItem1.Text = "删除";
-            this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem1_Click);
-            // 
-            // 导出EXCELToolStripMenuItem
-            // 
-            this.导出EXCELToolStripMenuItem.Name = "导出EXCELToolStripMenuItem";
-            this.导出EXCELToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.导出EXCELToolStripMenuItem.Text = "导出EXCEL";
-            this.导出EXCELToolStripMenuItem.Click += new System.EventHandler(this.导出EXCELToolStripMenuItem_Click);
             // 
             // FormMain
             // 
