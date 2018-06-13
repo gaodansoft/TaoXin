@@ -10,14 +10,15 @@ namespace Man
 {
     public class DataHelp
     {
-        public static string DataPath = ".\\Data\\data.txt";
+        public static string DataPath = ".\\data.txt";
         public static List<User> UserAll = new List<User>();
         public static List<BOM> RootBom = null;
         public static HashSet<string> hs = new HashSet<string>();
         public DataHelp()
         {
-            CountData();
-            StringBuilder sb = new StringBuilder();
+            // CountData();
+            GetRootBom2();
+             StringBuilder sb = new StringBuilder();
             GetData();
             string[] lines=  File.ReadAllLines(".\\桃一男户口本.csv");
             foreach (var item in lines)
@@ -25,7 +26,7 @@ namespace Man
               string[] sl=  item.Split(',');
                 if (sl.Length > 1)
                 {
-                    //  UserAll.Add(new User() { Id = sl[1], Name = sl[0] });
+                   
                     if (!hs.Contains(sl[0]))
                     {
                         if(!IsHave(sl[0]))
@@ -135,6 +136,53 @@ namespace Man
             var ttt = sb.ToString();
 
             // return null;
+        }
+
+        public void GetRootBom2()
+        {
+            //HashSet<string> hs = new HashSet<string>();
+            string[] lines = File.ReadAllLines(".\\aaaa.csv");
+            BOM bom = new BOM();
+            GetBomItem(bom, lines,0);
+
+
+
+        }
+        int curIndex = 1;
+        public void GetBomItem(BOM pBom, string[] lines, int level)
+        {
+            
+            if (level >= 5) return;
+           
+            int cIndex = level * 3-1;
+           // level++;
+            for (int b = 0; b < 100; b++)
+            {
+                var t = lines[curIndex+b].Split(',');
+                if (t.Length < 15) continue;
+
+                if (!string.IsNullOrWhiteSpace(t[cIndex+1]))
+                {
+                    var bom = new BOM();
+                    
+                    if (level == 0)
+                    {
+                        bom.Name = t[cIndex + 2];
+                        bom.Node = t[cIndex + 3];
+                    }
+                    else
+                    {
+                        bom.Name = t[cIndex + 1];
+                        bom.ID = t[cIndex + 2];
+                        bom.Node = t[cIndex + 3];
+                    }
+                    pBom.AddSon(bom);
+                    GetBomItem(bom, lines,  ++level);
+
+                }
+                curIndex++;
+            }
+
         }
         public void GetNOCount(string[] lines, Dictionary<string, string> temp)
         {
